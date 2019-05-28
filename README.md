@@ -1,6 +1,8 @@
 # Mask Based Unsupervised Content Transfer
 
 PyTorch implementation of "Mask Based Unsupervised Content Transfer"
+<img src="images/mustache_grid.png" width="500px">
+<img src="images/mu_gl_segmentation (1).png" width="500px">
 
 ## Prerequisites:
 Python 2.7 / 3.6, Pytorch 0.4, argparse, Pillow
