@@ -40,6 +40,12 @@ You can use the following example to resume training:
 ```
 python mask_train.py --root ./beard_data --out ./beard_experiment --load ./beard_experiment
 ```
+## Evaluation
+You can evalute with the command:
+```
+python mask_eval.py --root ./beard_data --out ./beard_experiment
+```
+Note that for evluate the segmentation, one should perform thresholding on the generated mask (search for the best threshold).
 
 ## Hyperparameters:
 
