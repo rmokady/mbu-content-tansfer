@@ -17,7 +17,7 @@ Contrary to the notation used in the paper, A is the larger set, for example, A 
 You can use the provided script preprocess.py to split celebA into the above format (with A and B based on the attribute of your choosing).
 For example, you can run the script using the following command:
 ```
-python preprocess.py --root ./img_align_celeba --attributes ./list_attr_celeba.txt --dest ./beard_train --config beard
+python preprocess.py --root ./img_align_celeba --attributes ./list_attr_celeba.txt --dest ./beard_data --config beard
 ```
 ## Training
 The Hyperparameters names are different then the article, the mapping between the codes name and the loss functions is:
