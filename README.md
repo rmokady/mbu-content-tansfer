@@ -2,11 +2,11 @@
 
 PyTorch implementation of "Mask Based Unsupervised Content Transfer"
 
-Given two domains where one contains some additional information compared to the other, our method capabale of disentangle the common and the seperate parts and transfer the seperate information from one image to another using a mask while not using any supervision at train time. For example, we can transfer facial hair from an image of a men with a mustache to an image of a shaved person, see image below. Using a mask enables state-of-the-art quality, but also the generated mask can be used as a semantic segmentation of the seperate part, thus our method perform weakly-supervised semantic segmentation, using only class lables as supervision, achieving state-of-the-art performance.
+Given two domains where one contains some additional information compared to the other, our method disentangles the common and the seperate parts and transfers the seperate information from one image to another using a mask, while not using any supervision at train time. For example, we can transfer facial hair from an image of a men with a mustache to an image of a shaved person, see image below. Using a mask enables state-of-the-art quality, but also, the generated mask can be used as a semantic segmentation of the seperate part. Thus our method perform weakly-supervised semantic segmentation, using only class lables as supervision, achieving state-of-the-art performance.
 
 For more details, please refer to the full article.
 
-The first example present facial hair transfer, where the facial hair of the men in the left column transferred to the shaved men in the upper row. The second example illustrate semantic segmentation of glasses and facial hair:
+The first example presents facial hair transfer, where the facial hair of the men in the left column transferred to the shaved men in the upper row. The second example illustrate semantic segmentation of glasses and facial hair:
 
 <img src="images/mustache_grid.png" width="500px">
 The second example illustrate semantic segmentation of glasses and facial hair:
