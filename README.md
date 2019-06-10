@@ -1,7 +1,15 @@
 # Mask Based Unsupervised Content Transfer
 
 PyTorch implementation of "Mask Based Unsupervised Content Transfer"
+
+Given two domains where one contains some additional information compared to the other, our method disentangles the common and the seperate parts and transfers the seperate information from one image to another using a mask, while not using any supervision at train time. For example, we can transfer facial hair from an image of a men with a mustache to an image of a shaved person, see image below. Using a mask enables state-of-the-art quality, but also, the generated mask can be used as a semantic segmentation of the seperate part. Thus our method perform weakly-supervised semantic segmentation, using only class lables as supervision, achieving state-of-the-art performance.
+
+For more details, please refer to the full article.
+
+The first example presents facial hair transfer, where the facial hair of the men in the left column transferred to the shaved men in the upper row. The second example illustrate semantic segmentation of glasses and facial hair:
+
 <img src="images/mustache_grid.png" width="500px">
+The second example illustrate semantic segmentation of glasses and facial hair:
 <img src="images/mu_gl_segmentation (1).png" width="500px">
 
 ## Prerequisites:
@@ -59,22 +67,20 @@ Hyperparameters for beard are the defualt.
 ```
 - Hyperparameters for smile (male and female):
 ```
---beta2 0.0001 --beta1 0.0 --alpha 1.0 --discweight 0.005  --alpha1 1.0 --alpha2 1.0 --gama 7.0 --delta 5.0
+--lr 0.0002 --disclr 0.0002 --alpha1 1.0 --alpha2 1.0 --beta1 0.0 --beta2 0.0001 --gama 7.0 --delta 5.0 --discweight 0.005
 ```
-- Command line for handbags content transfer: (Augmentation should be performed as the center of the image is different between the domains)
-```
-python mask_train.py --root ./bags/ --out ./bags0/ --alpha1 0.5 --alpha2 0.5 --beta1 0.0 --beta2 2.5 --delta 7.0 --gama 5.0 --discweight 0.1
-```
-
 - Hyperparameters for women hair segmentation ("black to blond content transfer"):
 ```
 --alpha1 2.0 --alpha2 2.0 --beta1 0.01 --beta2 7.0 --gama 10.0 --delta 5.0 --discweight 1.0
 ```
-
-- Hyperparameters for men hair segmentation ("black to blond content transfer"):
+- Hyperparameters for men hair segmentation ("dark hair to bald content transfer", use the bald condig in preprocess.py):
 ```
---alpha1 1.0 --alpha2 1.0 --beta2 1.0 --beta1 0.0 --gama is 5.0 --delta is 5.0 --discweight is 0.25
+--lr 0.0002 --disclr 0.0002 --alpha1 0.5 --alpha2 0.5 --beta1 0.0 --beta2 0.5 --gama 5.0 --delta 5.0 --discweight 1.0
 ```
+#- Command line for handbags content transfer: (Augmentation should be performed as the center of the image is different #between the domains)
+#```
+#python mask_train.py --root ./bags/ --out ./bags0/ --alpha1 0.5 --alpha2 0.5 --beta1 0.0 --beta2 2.5 --delta 7.0 --gama 5.0 #--discweight 0.1
+#```
 ## Custom Dataset
 First, You can then run the preprocessing in the following manner:
 ```

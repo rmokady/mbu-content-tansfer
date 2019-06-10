@@ -94,8 +94,6 @@ def train(args):
             if domA_img.size(0) != args.bs or domB_img.size(0) != args.bs:
                 break
 
-            sys.stdout.flush()
-
             if torch.cuda.is_available():
                 domA_img = domA_img.cuda()
                 domB_img = domB_img.cuda()
