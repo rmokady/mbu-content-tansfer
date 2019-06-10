@@ -103,6 +103,21 @@ def preprocess_celeba(args):
             elif int(line[21]) == 1 and int(line[25]) == 1 and int(line[1]) == -1:  # male AND (no beard, no shadow)
                 allB.append(line[0])
 
+    if args.config == 'blond_women':
+        for line in lines[2:]:
+            line = line.split()
+            if int(line[21]) == -1 and int(line[10]) == -1 and int(line[9]) == 1:
+                allA.append(line[0])
+            elif int(line[21]) == -1 and int(line[10]) == 1 and int(line[9]) == -1:
+                allB.append(line[0])
+
+    if args.config == 'bald':
+        for line in lines[2:]:
+            line = line.split()
+            if int(line[21]) == 1 and int(line[5]) == -1 and int(line[36]) == -1 and int(line[40]) == -1:  # male AND (no shadow) AND not bald AND no hat AND not young
+                allA.append(line[0])
+            elif int(line[21]) == 1 and int(line[5]) == 1 and int(line[36]) == -1 and int(line[29]) == -1 and int(line[18]) == -1:  # male AND (no shadow) AND bald AND no hat AND no-hair
+                allB.append(line[0])
 
     # Custom
     if args.config == 'custom':

@@ -87,7 +87,6 @@ def train(args):
         domA_loader = torch.utils.data.DataLoader(dataset=domA_train, batch_size=args.bs, shuffle=True)
         domB_loader = torch.utils.data.DataLoader(dataset=domB_train, batch_size=args.bs, shuffle=True)
 
-
         if _iter >= args.iters:
             break
 
@@ -190,23 +189,23 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--root', default='')
     parser.add_argument('--out', default='out')
-    parser.add_argument('--lr', type=float, default=0.00005)
+    parser.add_argument('--lr', type=float, default=0.0002)
     parser.add_argument('--bs', type=int, default=32)
     parser.add_argument('--iters', type=int, default=150000)
     parser.add_argument('--resize', type=int, default=128)
     parser.add_argument('--sep', type=int, default=25)
     parser.add_argument('--discweight', type=float, default=0.005)
-    parser.add_argument('--disclr', type=float, default=0.00005)
+    parser.add_argument('--disclr', type=float, default=0.0002)
     parser.add_argument('--progress_iter', type=int, default=2500)
     parser.add_argument('--display_iter', type=int, default=10000)
     parser.add_argument('--save_iter', type=int, default=25000)
     parser.add_argument('--load', default='')
-    parser.add_argument('--num_display', type=int, default=5)
-    parser.add_argument('--alpha1', type=float, default=1.0)
-    parser.add_argument('--alpha2', type=float, default=1.0)
-    parser.add_argument('--beta1', type=float, default=1.0)
-    parser.add_argument('--beta2', type=float, default=1.0)
-    parser.add_argument('--gama', type=float, default=5.0)
+    parser.add_argument('--num_display', type=int, default=6)
+    parser.add_argument('--alpha1', type=float, default=0.7)
+    parser.add_argument('--alpha2', type=float, default=0.7)
+    parser.add_argument('--beta1', type=float, default=0.0)
+    parser.add_argument('--beta2', type=float, default=0.001)
+    parser.add_argument('--gama', type=float, default=7.0)
     parser.add_argument('--delta', type=float, default=5.0)
     parser.add_argument('--gpu', type=int, default=-1)
 
