@@ -67,22 +67,20 @@ Hyperparameters for beard are the defualt.
 ```
 - Hyperparameters for smile (male and female):
 ```
---beta2 0.0001 --beta1 0.0 --alpha 1.0 --discweight 0.005  --alpha1 1.0 --alpha2 1.0 --gama 7.0 --delta 5.0
+--lr 0.0002 --disclr 0.0002 --alpha1 1.0 --alpha2 1.0 --beta1 0.0 --beta2 0.0001 --gama 7.0 --delta 5.0 --discweight 0.005
 ```
-- Command line for handbags content transfer: (Augmentation should be performed as the center of the image is different between the domains)
-```
-python mask_train.py --root ./bags/ --out ./bags0/ --alpha1 0.5 --alpha2 0.5 --beta1 0.0 --beta2 2.5 --delta 7.0 --gama 5.0 --discweight 0.1
-```
-
 - Hyperparameters for women hair segmentation ("black to blond content transfer"):
 ```
 --alpha1 2.0 --alpha2 2.0 --beta1 0.01 --beta2 7.0 --gama 10.0 --delta 5.0 --discweight 1.0
 ```
-
-- Hyperparameters for men hair segmentation ("black to blond content transfer"):
+- Hyperparameters for men hair segmentation ("dark hair to bald content transfer", use the bald condig in preprocess.py):
 ```
---alpha1 1.0 --alpha2 1.0 --beta2 1.0 --beta1 0.0 --gama is 5.0 --delta is 5.0 --discweight is 0.25
+--lr 0.0002 --disclr 0.0002 --alpha1 0.5 --alpha2 0.5 --beta1 0.0 --beta2 0.5 --gama 5.0 --delta 5.0 --discweight 1.0
 ```
+#- Command line for handbags content transfer: (Augmentation should be performed as the center of the image is different #between the domains)
+#```
+#python mask_train.py --root ./bags/ --out ./bags0/ --alpha1 0.5 --alpha2 0.5 --beta1 0.0 --beta2 2.5 --delta 7.0 --gama 5.0 #--discweight 0.1
+#```
 ## Custom Dataset
 First, You can then run the preprocessing in the following manner:
 ```
