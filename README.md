@@ -23,9 +23,9 @@ bash celeba_downloader.sh
 ```
 Contrary to the notation used in the paper, A is the larger set, for example, A is people with glasses and B is people without.
 You can use the provided script preprocess.py to split celebA into the above format (with A and B based on the attribute of your choosing).
-For example, you can run the script using the following command:
+For example, you can run the script using the following command (for Eyewear):
 ```
-python preprocess.py --root ./img_align_celeba --attributes ./list_attr_celeba.txt --dest ./beard_data --config beard
+python preprocess.py --root ./img_align_celeba --attributes ./list_attr_celeba.txt --dest ./glasses_data --config glasses
 ```
 ## Training
 The Hyperparameters names are different then the article, the mapping between the codes name and the loss functions is:
@@ -38,9 +38,9 @@ The Hyperparameters names are different then the article, the mapping between th
 - discweight - <img src="https://latex.codecogs.com/gif.latex?\mathcal{L}_{DC}" />
 
 
-Train using mask_train.py. You can use the following example to run with default hyperparameters (for beard):
+Train using mask_train.py. You can use the following example to run with default hyperparameters (for Eyewear):
 ```
-python mask_train.py --root ./beard_data --out ./beard_experiment
+python mask_train.py --root ./glasses_data --out ./glasses_experiment
 ```
 For choosing GPU use
 ```
@@ -48,23 +48,19 @@ For choosing GPU use
 ```
 You can use the following example to resume training:
 ```
-python mask_train.py --root ./beard_data --out ./beard_experiment --load ./beard_experiment
+python mask_train.py --root ./glasses_data --out ./glasses_experiment --load ./glasses_experiment
 ```
 ## Evaluation
 You can evalute with the command:
 ```
-python mask_eval.py --root ./beard_data --out ./beard_experiment
+python mask_eval.py --root ./glasses_data --out ./glasses_experiment
 ```
 Note that for evluate the segmentation, one should perform thresholding on the generated mask (search for the best threshold).
 
 ## Hyperparameters:
 
-Hyperparameters for beard are the defualt.
+Hyperparameters for Eyewear (glasses) are the defualt.
 
-- Hyperparameters for glasses (male and female):
-```
---disclr 0.0002 --lr 0.0002 --gama 7.0 --delta 5.0 --beta1 0.0 --beta2 0.001 --alpha1 0.7 --alpha2 0.7
-```
 - Hyperparameters for smile (male and female):
 ```
 --lr 0.0002 --disclr 0.0002 --alpha1 1.0 --alpha2 1.0 --beta1 0.0 --beta2 0.0001 --gama 7.0 --delta 5.0 --discweight 0.005
@@ -77,10 +73,7 @@ Hyperparameters for beard are the defualt.
 ```
 --lr 0.0002 --disclr 0.0002 --alpha1 0.5 --alpha2 0.5 --beta1 0.0 --beta2 0.5 --gama 5.0 --delta 5.0 --discweight 1.0
 ```
-#- Command line for handbags content transfer: (Augmentation should be performed as the center of the image is different #between the domains)
-#```
-#python mask_train.py --root ./bags/ --out ./bags0/ --alpha1 0.5 --alpha2 0.5 --beta1 0.0 --beta2 2.5 --delta 7.0 --gama 5.0 #--discweight 0.1
-#```
+
 ## Custom Dataset
 First, You can then run the preprocessing in the following manner:
 ```
