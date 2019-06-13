@@ -67,7 +67,7 @@ Hyperparameters for Eyewear (glasses) are the defualt.
 ```
 - Hyperparameters for women hair segmentation ("black to blond content transfer"):
 ```
---alpha1 2.0 --alpha2 2.0 --beta1 0.01 --beta2 7.0 --gama 10.0 --delta 5.0 --discweight 1.0
+--lr 0.0002 --disclr 0.0002 --alpha1 0.1 --alpha2 0.1 --beta1 0.0 --beta2 0.04 --gama 1.0 --delta 1.0 --discweight 1.0
 ```
 - Hyperparameters for men hair segmentation ("dark hair to bald content transfer", use the bald condig in preprocess.py):
 ```
