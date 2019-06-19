@@ -1,10 +1,10 @@
 # Mask Based Unsupervised Content Transfer
 
-PyTorch implementation of "Mask Based Unsupervised Content Transfer"
+PyTorch implementation of "Mask Based Unsupervised Content Transfer".
 
 Given two domains where one contains some additional information compared to the other, our method disentangles the common and the seperate parts and transfers the seperate information from one image to another using a mask, while not using any supervision at train time. For example, we can transfer facial hair from an image of a men with a mustache to an image of a shaved person, see image below. Using a mask enables state-of-the-art quality, but also, the generated mask can be used as a semantic segmentation of the seperate part. Thus our method perform weakly-supervised semantic segmentation, using only class lables as supervision, achieving state-of-the-art performance.
 
-For more details, please refer to the full article.
+For more details, please refer to the [paper](https://arxiv.org/abs/1906.06558).
 
 The first example presents facial hair transfer, where the facial hair of the men in the left column transferred to the shaved men in the upper row. The second example illustrate semantic segmentation of glasses and facial hair:
 
@@ -94,3 +94,18 @@ This implementation is heavily based on https://github.com/oripress/ContentDisen
 
 ## Citation
 If you found this work useful, please cite.
+```
+@article{abs-1906.06558,
+  author    = {Ron Mokady and
+               Sagie Benaim and
+               Lior Wolf and
+               Amit Bermano},
+  title     = {Mask Based Unsupervised Content Transfer},
+  journal   = {CoRR},
+  volume    = {abs/1906.06558},
+  year      = {2018},
+  url       = {http://arxiv.org/abs/1906.06558},
+  archivePrefix = {arXiv},
+  eprint    = {1906.06558},
+}
+```
