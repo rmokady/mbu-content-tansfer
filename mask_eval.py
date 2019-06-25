@@ -6,9 +6,9 @@ from mask_utils import save_imgs, load_model_for_eval
 
 
 def eval(args):
-    e1 = E1(args.sep, int((args.resize / 64)))
-    e2 = E2(args.sep, int((args.resize / 64)))
-    d_a = D_A(int((args.resize / 64)))
+    e1 = E1(args.sep, args.resize // 64)
+    e2 = E2(args.sep, args.resize // 64)
+    d_a = D_A(args.resize // 64)
     d_b = D_B(args.resize // 64)
 
     if torch.cuda.is_available():
