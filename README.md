@@ -22,6 +22,7 @@ Download [celebA](http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html) directly or 
 bash celeba_downloader.sh
 ```
 (or using this [script](https://gist.github.com/charlesreid1/4f3d676b33b95fce83af08e4ec261822))
+
 Contrary to the notation used in the paper, A is the larger set, for example, A is people with glasses and B is people without.
 You can use the provided script preprocess.py to split celebA into the above format (with A and B based on the attribute of your choosing).
 For example, you can run the script using the following command (for Eyewear):
