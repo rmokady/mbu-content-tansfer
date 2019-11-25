@@ -113,4 +113,4 @@ If you found this work useful, please cite.
 ```
 
 ## Contact
-For further questions, mail to ron.mokady@gmail.com .
+For further questions, ron.mokady@gmail.com .
