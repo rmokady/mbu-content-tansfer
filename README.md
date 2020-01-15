@@ -17,11 +17,7 @@ Python 2.7 / 3.6, Pytorch 0.4, argparse, Pillow
 
 ## Download and Prepare the Data:
 
-Download [celebA](http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html) directly or by running the following command:
-```
-bash celeba_downloader.sh
-```
-(or using this [script](https://gist.github.com/charlesreid1/4f3d676b33b95fce83af08e4ec261822))
+Download [celebA](http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html) directly or using this [script](https://gist.github.com/charlesreid1/4f3d676b33b95fce83af08e4ec261822).
 
 Contrary to the notation used in the paper, A is the larger set, for example, A is people with glasses and B is people without.
 You can use the provided script preprocess.py to split celebA into the above format (with A and B based on the attribute of your choosing).
