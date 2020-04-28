@@ -1,4 +1,4 @@
-# Mask Based Unsupervised Content Transfer
+# Mask Based Unsupervised Content Transfer (ICLR 2020)
 
 PyTorch implementation of "Mask Based Unsupervised Content Transfer".
 
