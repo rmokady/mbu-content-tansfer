@@ -133,7 +133,7 @@ def load_model(load_path, e1, e2, d_a, d_b, ae_opt, disc, disc_opt):
     return state['iters']
 
 
-def load_model_for_eval(load_path, e1, e2, d_b, ):
+def load_model_for_eval(load_path, e1, e2, d_b ):
     state = torch.load(load_path)
     e1.load_state_dict(state['e1'])
     e2.load_state_dict(state['e2'])
