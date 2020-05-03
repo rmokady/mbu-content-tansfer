@@ -2,7 +2,7 @@ import argparse
 import os
 import torch
 from mask_models import E1, E2, D_A, D_B
-from mask_utils import save_imgs, load_model_for_eval
+from mask_utils import save_imgs, load_model_for_eval, load_model_for_eval_pretrained
 
 
 def eval(args):
@@ -23,7 +23,10 @@ def eval(args):
 
     if args.load != '':
         save_file = os.path.join(args.load, args.check)
-        _iter = load_model_for_eval(save_file, e1, e2, d_a, d_b)
+        if not args.old_model:
+            _iter = load_model_for_eval(save_file, e1, e2, d_a, d_b)
+        else:
+            _iter = load_model_for_eval_pretrained(save_file, e1, e2, d_a, d_b)
 
     e1 = e1.eval()
     e2 = e2.eval()
@@ -48,6 +51,7 @@ if __name__=='__main__':
     parser.add_argument('--bs', type=int, default=32)
     parser.add_argument('--num_display', type=int, default=6)
     parser.add_argument('--gpu', type=int, default=-1)
+    parser.add_argument('--old_model', type=bool, default=False)
 
     args = parser.parse_args()
 
