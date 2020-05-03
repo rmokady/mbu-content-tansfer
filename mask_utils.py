@@ -72,6 +72,62 @@ def save_imgs(args, e1, e2, d_a, d_b, iters):
                       normalize=True, nrow=args.num_display + 1)
 
 
+def removal(args, e1, e2, d_a, d_b):
+
+    transform = torchvision.transforms.Compose([
+        torchvision.transforms.Resize((args.resize, args.resize)),
+        torchvision.transforms.ToTensor(),
+        torchvision.transforms.Normalize([0.5, 0.5, 0.5], [0.5, 0.5, 0.5])
+    ])
+
+    if args.eval_folder != '':
+
+        class Faces(data.Dataset):
+            """Faces."""
+
+            def __init__(self, root_dir, transform, size, ext):
+                self.root_dir = root_dir
+                self.transform = transform
+                self.size = size
+                self.ext = ext
+
+            def __len__(self):
+                return self.size  # number of images
+
+            def __getitem__(self, idx):
+                img_name = os.path.join(self.root_dir, str(idx) + self.ext)
+                image = Image.open(img_name)
+                sample = self.transform(image)
+                return sample
+
+        test_data = Faces(args.eval_folder, transform, args.amount, args.ext)
+        domA_test_loader = torch.utils.data.DataLoader(dataset=test_data, batch_size=args.bs, shuffle=False)
+    else:
+        domA_test = CustomDataset(os.path.join(args.root, 'testA.txt'), transform=transform)
+        domA_test_loader = torch.utils.data.DataLoader(domA_test, batch_size=args.bs, shuffle=False)
+
+    cnt = 0
+    for test_domA in domA_test_loader:
+        if torch.cuda.is_available():
+            test_domA = test_domA.cuda()
+        else:
+            test_domA = test_domA
+
+        test_domA = test_domA.view((-1, 3, args.resize, args.resize))
+        for i in range(args.bs):
+            separate_A = e2(test_domA[i].unsqueeze(0))
+            common_A = e1(test_domA[i].unsqueeze(0))
+            A_encoding = torch.cat([common_A, separate_A], dim=1)
+            A_decoding = d_a(A_encoding)
+            BA_decoding, mask = d_b(A_encoding, test_domA[i], A_decoding, args.threshold)
+
+            exps = torch.cat([test_domA[i].unsqueeze(0), BA_decoding], 0)
+            vutils.save_image(exps, '%s/%0d.png' % (args.out, cnt), normalize=True)
+            print(cnt)
+            cnt += 1
+            if cnt == args.amount:
+                break
+
 def get_test_imgs(args):
 
 
@@ -133,11 +189,21 @@ def load_model(load_path, e1, e2, d_a, d_b, ae_opt, disc, disc_opt):
     return state['iters']
 
 
-def load_model_for_eval(load_path, e1, e2, d_b ):
+def load_model_for_eval(load_path, e1, e2, d_a, d_b):
     state = torch.load(load_path)
     e1.load_state_dict(state['e1'])
     e2.load_state_dict(state['e2'])
+    d_a.load_state_dict(state['d_a'])
     d_b.load_state_dict(state['d_b'])
+    return state['iters']
+
+
+def load_model_for_eval_pretrained(load_path, e1, e2, d_a, d_b):
+    state = torch.load(load_path)
+    e1.load_state_dict(state['e1'])
+    e2.load_state_dict(state['e2'])
+    d_a.load_state_dict(state['decoder'])
+    d_b.load_state_dict(state['mustacher'])
     return state['iters']
 
 

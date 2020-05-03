@@ -1,8 +1,8 @@
 import argparse
 import os
 import torch
-from mask_models import E1, E2, D_A, D_B
-from mask_utils import save_imgs, load_model_for_eval
+from mask_models import E1, E2, D_A, D_B_removal
+from mask_utils import load_model_for_eval, load_model_for_eval_pretrained, removal
 
 
 def eval(args):
@@ -13,7 +13,7 @@ def eval(args):
     e1 = E1(args.sep, args.resize // 64)
     e2 = E2(args.sep, args.resize // 64)
     d_a = D_A(args.resize // 64)
-    d_b = D_B(args.resize // 64)
+    d_b = D_B_removal(args.resize // 64)
 
     if torch.cuda.is_available():
         e1 = e1.cuda()
@@ -23,7 +23,10 @@ def eval(args):
 
     if args.load != '':
         save_file = os.path.join(args.load, args.check)
-        _iter = load_model_for_eval(save_file, e1, e2, d_a, d_b)
+        if not args.old_model:
+            _iter = load_model_for_eval(save_file, e1, e2, d_a, d_b)
+        else:
+            _iter = load_model_for_eval_pretrained(save_file, e1, e2, d_a, d_b)
 
     e1 = e1.eval()
     e2 = e2.eval()
@@ -33,7 +36,7 @@ def eval(args):
     if not os.path.exists(args.out) and args.out != "":
         os.mkdir(args.out)
 
-    save_imgs(args, e1, e2, d_a, d_b, _iter)
+    removal(args, e1, e2, d_a, d_b)
 
 
 if __name__=='__main__':
@@ -47,6 +50,10 @@ if __name__=='__main__':
     parser.add_argument('--sep', type=int, default=25)
     parser.add_argument('--bs', type=int, default=32)
     parser.add_argument('--num_display', type=int, default=6)
+    parser.add_argument('--amount', type=int, default=64)
+    parser.add_argument('--ext', default='.png')
+    parser.add_argument('--old_model', type=bool, default=False)
+    parser.add_argument('--threshold', type=float, default=0.1)
     parser.add_argument('--gpu', type=int, default=-1)
 
     args = parser.parse_args()

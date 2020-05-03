@@ -100,6 +100,40 @@ class D_B(nn.Module):
         oimg = oimg * mask + my_input * (1 - mask)
         return oimg, mask
 
+class D_B_removal(nn.Module):
+    def __init__(self, size):
+        super(D_B_removal, self).__init__()
+        self.size = size
+
+        self.main = nn.Sequential(
+            nn.ConvTranspose2d(512, 512, 4, 2, 1),
+            nn.BatchNorm2d(512),
+            nn.LeakyReLU(0.2, inplace=True),
+            nn.ConvTranspose2d(512, 256, 4, 2, 1),
+            nn.BatchNorm2d(256),
+            nn.LeakyReLU(0.2, inplace=True),
+            nn.ConvTranspose2d(256, 128, 4, 2, 1),
+            nn.BatchNorm2d(128),
+            nn.LeakyReLU(0.2, inplace=True),
+            nn.ConvTranspose2d(128, 64, 4, 2, 1),
+            nn.BatchNorm2d(64),
+            nn.LeakyReLU(0.2, inplace=True),
+            nn.ConvTranspose2d(64, 32, 4, 2, 1),
+            nn.BatchNorm2d(32),
+            nn.LeakyReLU(0.2, inplace=True),
+            nn.ConvTranspose2d(32, 4, 4, 2, 1),
+        )
+
+    def forward(self, net, my_input, other_input, threshold):
+        net = net.view(-1, 512, self.size, self.size)
+        output = self.main(net)
+        mask = torch.sigmoid(output[:, :1])
+        mask = mask.ge(threshold)
+        mask = mask.type(torch.cuda.FloatTensor)
+        mask = mask.repeat(1, 3, 1, 1)
+        oimg = other_input * mask + my_input * (1 - mask)
+        return oimg, mask
+
 class D_A(nn.Module):
     def __init__(self, size):
         super(D_A, self).__init__()
