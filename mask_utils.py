@@ -90,12 +90,13 @@ def removal(args, e1, e2, d_a, d_b):
                 self.transform = transform
                 self.size = size
                 self.ext = ext
+                self.files = [f for f in os.listdir(root_dir) if f.endswith(ext)]
 
             def __len__(self):
                 return self.size  # number of images
 
             def __getitem__(self, idx):
-                img_name = os.path.join(self.root_dir, str(idx) + self.ext)
+                img_name = os.path.join(self.root_dir, self.files[idx])
                 image = Image.open(img_name)
                 sample = self.transform(image)
                 return sample
