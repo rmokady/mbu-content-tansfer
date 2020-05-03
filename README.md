@@ -87,6 +87,23 @@ root/
 ```
 Second, search for the best hyperparameters, as the default hyperparameters might not suit any dataset.
 
+## Removal
+For facial hair removal:
+First, download [pretrained model](https://drive.google.com/file/d/1gWSZK8ODL4r8zQqzJTS6wWlDKl-HTjFK/view).
+Then run the command:
+```
+python removal.py --gpu 1 --eval_folder ./folder_to_eval/ --amount 64 --load ./ --check checkpoint_mustache --out ./out_folder/ --threshold 0.1 --ext '.png' --old_model True
+```
+Where "folder_to_eval" contain the images on which you wish to perform removel, "ext" is the file extension and "amount" is the amount of images you wish to evaluate, you can also use dataset similar to training by replacing "folder_to_eval" with:
+```
+--root ./root_folder/
+```
+(in this case "ext" and "amount" are not necessary)
+If you wish to train the model by yourself please use
+```
+--old_model False
+```
+
 ## Acknowledgements
 This implementation is heavily based on https://github.com/oripress/ContentDisentanglement.
 
