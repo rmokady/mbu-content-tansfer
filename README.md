@@ -98,10 +98,21 @@ Where "folder_to_eval" contain the images on which you wish to perform removel, 
 ```
 --root ./root_folder/
 ```
-(in this case "ext" and "amount" are not necessary)
+(in this case "ext" and "amount" are not necessary).
+
 If you wish to train the model by yourself please use
 ```
 --old_model False
+```
+
+## Our models
+Facial hair [pretrained model](https://drive.google.com/file/d/1gWSZK8ODL4r8zQqzJTS6wWlDKl-HTjFK/view).
+
+Eyewear [pretrained model](https://drive.google.com/open?id=1dbJdtpNCDxSXJrNaUVc4IQnsCfyKoySO).
+
+You can perform Eyewear evaluation using the command:
+```
+python mask_eval.py --root ./glasses_data --out ./gl_out/ --load ./ --check checkpoint_glasses --gpu 1 --old_model True
 ```
 
 ## Acknowledgements
