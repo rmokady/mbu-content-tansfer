@@ -2,6 +2,8 @@
 
 PyTorch implementation of "Mask Based Unsupervised Content Transfer".
 
+## [5 minutes video](https://iclr.cc/virtual_2020/poster_BJe-91BtvH.html)
+
 Given two domains where one contains some additional information compared to the other, our method disentangles the common and the seperate parts and transfers the seperate information from one image to another using a mask, while not using any supervision at train time. For example, we can transfer facial hair from an image of a men with a mustache to an image of a shaved person, see image below. Using a mask enables state-of-the-art quality, but also, the generated mask can be used as a semantic segmentation of the seperate part. In addition, our method can also be used for removal.
 
 For more details, please refer to the [paper](https://openreview.net/pdf?id=BJe-91BtvH).
