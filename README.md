@@ -12,7 +12,7 @@ The first example presents facial hair transfer, where the facial hair of the me
 The second example illustrate semantic segmentation of glasses and facial hair:
 <img src="images/mu_gl_segmentation (1).png" width="500px">
 Third example shows facial hair removal:
-<img src="images/removal2.png" width="300px">
+<img src="images/removal3.png" width="300px">
 
 ## Prerequisites:
 Python 2.7 / 3.6, Pytorch 0.4, argparse, Pillow
